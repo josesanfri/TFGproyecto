@@ -59,6 +59,7 @@
             <li class="nav-item px-lg-4 {% if request.path|slice:":6" == '/blog/' %}active{% endif %}">
               <a class="nav-link text-uppercase text-expanded" href="{% url 'blog' %}">Blog</a>
             </li>
+            
             {% if not request.user.is_authenticated %}
                 <li class="nav-item px-lg-4 {% if request.path == '/accounts/login/' %}active{% endif %}">
                   <a class="nav-link text-uppercase text-expanded" href="{% url 'login' %}">Acceder</a>
