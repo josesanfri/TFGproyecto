@@ -22,10 +22,12 @@ urlpatterns = [
     path('', include('core.urls')),
     #Paths Services
     path('services/', include('services.urls')),
-     #Paths Blog
+    #Paths Blog
     path('blog/', include('blog.urls')),
-     #Paths Pages
+    #Paths Pages
     path('page/', include('pages.urls')),
+    # Paths de pages
+    path('contact/', include('contact.urls')),
     #Paths Admin
     path('admin/', admin.site.urls),
 ]
