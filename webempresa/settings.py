@@ -32,6 +32,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'registration',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -150,6 +151,10 @@ EMAIL_HOST = 'smtp.mailtrap.io'
 EMAIL_HOST_USER = '4cae2597c9634e'
 EMAIL_HOST_PASSWORD = 'f84d7038c52dfd'
 EMAIL_PORT = '2525'
+
+#AUTH REDIRECTS
+LOGIN_REDIRECT_URL = 'home'
+LOGOUT_REDIRECT_URL = 'home'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field

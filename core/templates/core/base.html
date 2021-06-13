@@ -8,7 +8,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>{% block title %}{% endblock %} | La Caffettiera</title>
+    <title>{% block title %}{% endblock %} | Bit Coffe</title>
 
     {% load static %}
 
@@ -28,14 +28,14 @@
   <body>
 
     <h1 class="site-heading text-center text-white d-none d-lg-block">
-      <span class="site-heading-upper text-primary mb-3">L'autentico caffè d'italia</span>
-      <span class="site-heading-lower">La Caffettiera</span>
+      <span class="site-heading-upper text-primary mb-3">El auténtico café</span>
+      <span class="site-heading-lower">Bit Coffe</span>
     </h1>
 
     <!-- Navegación -->
     <nav class="navbar navbar-expand-lg navbar-dark py-lg-4" id="mainNav">
       <div class="container">
-        <a class="navbar-brand text-uppercase text-expanded font-weight-bold d-lg-none" href="{% url 'home' %}">La Caffettiera</a>
+        <a class="navbar-brand text-uppercase text-expanded font-weight-bold d-lg-none" href="{% url 'home' %}">Bit Coffe</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -59,6 +59,21 @@
             <li class="nav-item px-lg-4 {% if request.path|slice:":6" == '/blog/' %}active{% endif %}">
               <a class="nav-link text-uppercase text-expanded" href="{% url 'blog' %}">Blog</a>
             </li>
+            {% if not request.user.is_authenticated %}
+                <li class="nav-item px-lg-4 {% if request.path == '/accounts/login/' %}active{% endif %}">
+                  <a class="nav-link text-uppercase text-expanded" href="{% url 'login' %}">Acceder</a>
+                </li>
+                <li class="nav-item px-lg-4 {% if request.path == 'accounts/singup/' %}active{% endif %}">
+                  <a class="nav-link text-uppercase text-expanded" href="{% url 'signup' %}">Registro</a>
+                </li>
+              {% else %}
+                <li class="nav-item px-lg-4 {% if request.path == '/accounts/profile/' %}active{% endif %}">
+                  <a class="nav-link text-uppercase text-expanded" href="{% url 'profile' %}">Perfil</a>
+                </li>
+                <li class="nav-item px-lg-4">
+                  <a class="nav-link text-uppercase text-expanded" href="{% url 'logout' %}">Salir</a>
+                </li>
+              {% endif %}
           </ul>
         </div>
       </div>
@@ -102,7 +117,7 @@
             <a href="{% url 'page' page.id page.title|slugify %}" class="link">{{page.title}}</a> {% if not forloop.last %}·{% endif %} 
           {% endfor %}
 		    </p>
-        <p class="m-0 mbt1">&copy; La Caffettiera 2018</p>
+        <p class="m-0 mbt1">&copy; Bit Coffe 2021</p>
       </div>
 	</footer>
 
