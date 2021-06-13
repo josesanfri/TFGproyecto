@@ -46,7 +46,8 @@ INSTALLED_APPS = [
     'pages.apps.PagesConfig',
     'services.apps.ServicesConfig',
     'social.apps.SocialConfig',
-    'products'
+    'products',
+    'cart'
 ]
 
 MIDDLEWARE = [
