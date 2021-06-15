@@ -1,0 +1,63 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block title %}
+  Your shopping cart
+{% endblock %}
+
+{% block content %}
+  <div class="row">
+    <div class="col-md-12">
+      <h1>Carrito</h1>
+
+      <table class="table">
+        <thead>
+          <th>Imagen</th>
+          <th>Producto</th>
+          <th>Cantidad</th>
+          <th>Eliminar</th>
+          <th>Precio unidad</th>
+          <th>Precio</th>
+        </thead>
+        <tbody>
+          {% for item in cart %}
+            {% with product=item.product %}
+              <tr>
+                <td>
+                  <a href="#">
+                    <img src="{% if product.image %}{{ product.image.url }}{% else %}{% static 'registration/img/no-avatar.jpg' %}{% endif %}" style="width: 120px;" />
+                  </a>
+                </td>
+                <td>{{ product.name }}</td>
+                <td>
+                  <form action="{% url 'cart:cart_add' product.id %}" method="post">
+                    {{ item.update_quantity_form.quantity }}
+                    {{ item.update_quantity_form.update }}
+                    <input class="btn btn-default" type="submit" value="Update">
+                    {% csrf_token %}
+                  </form>
+                </td>
+                <td><a href="{% url 'cart:cart_remove' product.id %}">Remove</a></td>
+                <td>{{ item.price }}</td>
+                <td>{{ item.total_price }}</td>
+              </tr>
+            {% endwith %}
+          {% endfor %}
+
+          <tr class="total">
+            <td><strong>Total</strong></td>
+            <td colspan="4"></td>
+            <td style="color:#337ab7; font-size: 20px;">€{{ cart.get_total_price|floatformat:"2" }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="row">
+      <div class="col-md-4" style="text-align:right;">
+        <a class="btn btn-default" href="{% url 'product:listado_productos' %}">Continuar comprando</a>
+      </div>
+    </div>
+  </div>
+
+{% endblock %}
