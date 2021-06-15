@@ -1,3 +1,7 @@
+from decimal import Decimal
+from django.conf import settings
+from products.models import Product
+
 class Cart:
     def __init__(self, request):
         self.request = request
@@ -53,4 +57,19 @@ class Cart:
     def clear(self):
         self.session["cart"] = {}
         self.session.modified = True
+
+    def __iter__(self):
+        """
+        Iterate over the items in the cart and get the products
+        from the database.
+        """
+        product_ids = self.cart.keys()
+        products = Product.objects.filter(id__in=product_ids)
+        for product in products:
+            self.cart[str(product.id)]['product'] = product
+
+        for item in self.cart.values():
+            item['price'] = Decimal(item['price'])
+            item['total_price'] = item['price'] * item['quantity']
+            yield item
 

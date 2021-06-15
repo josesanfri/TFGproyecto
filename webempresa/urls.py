@@ -33,6 +33,8 @@ urlpatterns = [
     path('accounts/', include('registration.urls')),
     # Paths de pages
     path('products/', include('products.urls')),
+    # Paths de pages
+    path('cart/', include('cart.urls')),
     #Paths Admin
     path('admin/', admin.site.urls),
 ]
